@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;    // Must Must use
 use Illuminate\Support\Facades\Blade;   // Must Must use
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,5 +29,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('admin', function () {
             return auth()->check() && auth()->user()->role == "admin";
         });
+
+        if(config('app.env') == "production"){
+            URL::forceScheme('https');
+        }
     }
 }
