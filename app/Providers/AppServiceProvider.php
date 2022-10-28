@@ -30,8 +30,8 @@ class AppServiceProvider extends ServiceProvider
             return auth()->check() && auth()->user()->role == "admin";
         });
 
-        // if(config('app.env') == "production"){
-        //     URL::forceScheme('https');
-        // } 
+        if(config('app.env') == "production"){
+            URL::forceScheme('https');
+        } 
     }
 }
