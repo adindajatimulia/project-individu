@@ -49,6 +49,16 @@ class MasterProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'required' => ':attribute ini harus diisi'
+        ];
+
+        $this->validate($request,[
+            'nama_project' => 'required',
+            'deskripsi' => 'required',
+            'tanggal' => 'required'
+        ],$messages);
+
         Projek::create([
             'id_siswa' => $request->id_siswa,
             'nama_projek' => $request->nama_project,

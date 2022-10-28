@@ -12,7 +12,7 @@ class Kontak extends Model
     use HasFactory;
     protected $fillable = [
         'id_siswa',
-        'id_jenis',
+        'jenis_id',
         'deskripsi'    
     ];
     public function siswa(){

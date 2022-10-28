@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Siswa;
+use App\Models\Jenis_kontak;
+use App\Models\Kontak;
 
 class MasterContactController extends Controller
 {
@@ -13,7 +16,8 @@ class MasterContactController extends Controller
      */
     public function index()
     {
-        return view('mastercontact');
+        $siswa = Siswa::all();
+        return view('mastercontact',compact('siswa'));
     }
 
     /**
@@ -34,7 +38,14 @@ class MasterContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+  
+        Kontak::create([
+            'id_siswa' => $request->id_siswa,
+            'jenis_id' => $request->jenis_kontak,
+            'deskripsi' => $request->deskripsi,  
+        ]);
+
+        return redirect('/admin/mastercontact')->with('pesan', 'Kontak baru berhasil ditambahkan ! ');
     }
 
     /**
@@ -45,7 +56,9 @@ class MasterContactController extends Controller
      */
     public function show($id)
     {
-        return view('master_contact.show');
+        $siswa = siswa::find($id);
+        $kontak = $siswa->kontak;
+        return view('master_contact.show',compact('kontak'));
     }
 
     /**
@@ -80,5 +93,11 @@ class MasterContactController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function newcontact($id){
+        $siswa = Siswa::find($id);
+        $jenis_kontak = Jenis_kontak::all();
+        return view('master_contact.create',compact('siswa','jenis_kontak'));
     }
 }

@@ -1,6 +1,6 @@
-@extends('admin.admin')
-@section('title', 'Detail Master Contact')
-@section('content-title', 'DETAIL DATA')
-@section('content')
-
-@endsection
+<ul class="list-group">
+    <li class="list-group-item active" aria-current="true">kontak anda</li>
+    @foreach ($kontak as $item)       
+    <li class="list-group-item">{{ $item->jenis->jenis_kontak }} : {{ $item->deskripsi }}</li>   
+    @endforeach
+</ul>

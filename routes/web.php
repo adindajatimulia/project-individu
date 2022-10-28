@@ -47,6 +47,7 @@ Route::get('admin/mastersiswa/{mastersiswa}/hapus', [MasterSiswaController::clas
 //     return view('mastersiswa');
 // }); 
 Route::resource('admin/mastercontact', MasterContactController::class);
+Route::get('admin/mastercontact/{mastercontact}/newcontact', [MasterContactController::class, 'newcontact'])->name('mastercontact.newcontact');
 // Route::get('admin/mastercontact', function () {
 //     return view('mastercontact');
 // });
