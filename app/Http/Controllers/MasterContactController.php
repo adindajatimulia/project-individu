@@ -69,7 +69,9 @@ class MasterContactController extends Controller
      */
     public function edit($id)
     {
-        return view('master_contact.edit');
+        $kontak = Kontak::find($id);
+        $jenis_kontak = Jenis_kontak::all();
+        return view('master_contact.edit',compact('kontak','jenis_kontak'));
     }
 
     /**
@@ -81,7 +83,14 @@ class MasterContactController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kontak = Kontak::find($id);
+        $kontak->id = $request->id;
+        $kontak->id_siswa = $request->id_siswa;
+        $kontak->jenis_id = $request->jenis_id;
+        $kontak->deskripsi = $request->deskripsi;
+        $kontak->save();
+        
+        return redirect('/admin/masterproject')->with('pesan', 'Data Berhasil Diubah ! ');
     }
 
     /**
@@ -99,5 +108,20 @@ class MasterContactController extends Controller
         $siswa = Siswa::find($id);
         $jenis_kontak = Jenis_kontak::all();
         return view('master_contact.create',compact('siswa','jenis_kontak'));
+    }
+
+    public function ubah(Request $request, $id){
+        $kontak = Kontak::find($id);
+        $kontak->id = $id;
+        $kontak->id_siswa = $request->id_siswa;
+        $kontak->jenis_id = $request->jenis_kontak;
+        $kontak->deskripsi = $request->deskripsi;
+        $kontak->save();
+        
+        return redirect('/admin/mastercontact')->with('pesan', 'Data Berhasil Diubah ! ');
+    }
+    public function hapus($id){
+        Kontak::find($id)->delete();
+        return redirect('/admin/mastercontact')->with('pesan', 'Data Berhasil Dihapus ! ');
     }
 }

@@ -48,6 +48,8 @@ Route::get('admin/mastersiswa/{mastersiswa}/hapus', [MasterSiswaController::clas
 // }); 
 Route::resource('admin/mastercontact', MasterContactController::class);
 Route::get('admin/mastercontact/{mastercontact}/newcontact', [MasterContactController::class, 'newcontact'])->name('mastercontact.newcontact');
+Route::post('admin/mastercontact/{mastercontact}/update', [MasterContactController::class, 'ubah'])->name('mastercontact.ubah');
+Route::get('admin/mastercontact/{mastercontact}/hapus', [MasterContactController::class, 'hapus'])->name('mastercontact.hapus');
 // Route::get('admin/mastercontact', function () {
 //     return view('mastercontact');
 // });
