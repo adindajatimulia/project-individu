@@ -119,6 +119,16 @@ class MasterProjectController extends Controller
     
     public function ubah(Request $request, $id)
     {
+        $messages = [
+            'required' => ':attribute ini harus diisi'
+        ];
+
+        $this->validate($request,[
+            'nama_project' => 'required',
+            'deskripsi' => 'required',
+            'tanggal' => 'required'
+        ],$messages);
+
         $project = Projek::find($id);
         $project->id_siswa = $request->id_siswa;
         $project->nama_projek = $request->nama_project;

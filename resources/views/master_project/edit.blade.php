@@ -9,6 +9,17 @@
       <h6 class="m-0 font-weight-bold text-primary">edit your new project</h6>
     </div>
     <div class="card-body">
+          {{-- ALERT ERROR --}}
+          @if(count($errors) > 0)
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+          @endif
+          {{-- AKHIR ALERT ERROR --}}
     <form class="row g-3" method="POST" action="{{  route('masterproject.ubah', $projek->id ) }}" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="id_siswa" value="{{ $projek->id_siswa }}">

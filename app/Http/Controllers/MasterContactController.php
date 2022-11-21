@@ -38,6 +38,13 @@ class MasterContactController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'required' => ':attribute ini harus diisi'
+        ];
+
+        $this->validate($request,[
+            'deskripsi' => 'required'
+        ],$messages);
   
         Kontak::create([
             'id_siswa' => $request->id_siswa,
@@ -111,6 +118,14 @@ class MasterContactController extends Controller
     }
 
     public function ubah(Request $request, $id){
+        $messages = [
+            'required' => ':attribute ini harus diisi'
+        ];
+
+        $this->validate($request,[
+            'deskripsi' => 'required'
+        ],$messages);
+        
         $kontak = Kontak::find($id);
         $kontak->id = $id;
         $kontak->id_siswa = $request->id_siswa;
